@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- <style>
+    * {
+      box-sizing: border-box;
+    }
+    form {
+      border: 1px solid #ddd;
+      max-width: 400px;
+      /* display: block 인 element를 가운데에 정렬시킨다 */
+      margin: 100px auto 0;
+      padding: 1rem;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+    }
+    input[type=text], input[type=password] {
+      padding: 0.5rem;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+    .btn {
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      background-color: #555;
+      color: #fff;
+    }
+    .btn:hover {
+      background-color: #333;
+    }
+    .flex {
+      display: flex;
+    }
+    .justify-between {
+      justify-content: space-between;
+    }
+    .items-center {
+      align-items: center;
+    }
+  </style>
+
+  <form action="">
+    <h1>Login</h1>
+    <div class="mb-2">
+      <label for="">Username</label>
+      <input type="text" autocomplete="off">
+    </div>
+    <div class="mb-2">
+      <label for="">Password</label>
+      <input type="password" autocomplete="off">
+    </div>
+    <div class="flex justify-between items-center">
+      <button class="btn">Sign In</button>
+      <a href="">Forgot password?</a>
+    </div>
+  </form> -->
+
+  <!-- <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .wrap {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      /* border: 1px dashed; */
+      width: 450px;
+      height: auto;
+    }
+    .logo {
+      height: 300px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    form {
+      /* border: 1px dashed; */
+      height: 3rem;
+      position: relative;
+    }
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 0 3rem;
+      font-size: 1rem;
+      border-radius: 2rem;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+    .top-left, .top-right {
+      position: absolute;
+      width: 3rem;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .top-left {
+      top: 0;
+      left: 0;
+    }
+    .top-right {
+      top: 0;
+      right: 0;
+    }
+  </style>
+
+  <div class="wrap">
+    <div class="container">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="272" height="92">
+          <path fill="#EA4335" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/><path fill="#FBBC05" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/>
+          <path fill="#4285F4" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"/><path fill="#34A853" d="M225 3v65h-9.5V3h9.5z"/><path fill="#EA4335" d="m262.02 54.48 7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98 19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z"/><path fill="#4285F4" d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z"/></svg>
+      </div>
+
+      <form action="">
+        <input type="text" placeholder="Google 검색 또는 URL 입력">
+        <div class="top-left">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#5F6368"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </div>
+        <div class="top-right">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path fill="#4285F4" d="M12 15c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v7c0 1.66 1.34 3 3 3z"/><path fill="#34A853" d="M11 18.92h2V22h-2z"/><path fill="#F4B400" d="M7 12H5c0 1.93.78 3.68 2.05 4.95l1.41-1.41C7.56 14.63 7 13.38 7 12z"/><path fill="#EA4335" d="M12 17c-1.38 0-2.63-.56-3.54-1.47l-1.41 1.41A6.99 6.99 0 0 0 12.01 19c3.87 0 6.98-3.14 6.98-7h-2c0 2.76-2.23 5-4.99 5z"/></svg>
+        </div>
+      </form>
+    </div>
+  </div> -->
+
+  <!-- # Table -->
+
+  <!-- <style>
+    table {
+      /* border-collapse: separate; */
+      border-collapse: collapse;
+    }
+    td[scope=row] {
+      font-weight: bold;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+    }
+  </style>
+
+  <h1>Table: Basic</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">1</td>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <td scope="row">2</td>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <td scope="row">3</td>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table> -->
+
+  <!-- <style>
+    table {
+      border-collapse: collapse;
+    }
+    thead tr {
+      border-bottom: 1px solid;
+    }
+    td[scope=row] {
+      font-weight: 700;
+    }
+    th, td {
+      padding: 0.5rem;
+    }
+    /* :nth-child() odd(홀수), even(짝수) */
+    tbody tr:nth-child(odd) {
+      background-color: #f1f1f1;
+    }
+  </style>
+
+  <h1>Table: Striped rows</h1>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">1</td>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <td scope="row">2</td>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <td scope="row">3</td>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>  -->
+
+  <!-- <style>
+    table {
+      border-collapse: collapse;
+      caption-side: bottom;
+    }
+    thead tr {
+      border-bottom: 1px solid;
+    }
+    td[scope=row] {
+      font-weight: bold;
+    }
+    th, td {
+      padding: 0.5rem;
+    }
+    tbody tr {
+      border-bottom: 1px solid #eee;
+    }
+    /* tbody tr:last-child {
+      border: none;
+    } */
+    tfoot {
+      border-top: 1px solid;
+      border-bottom: 1px solid #eee;
+    }
+    caption {
+      text-align: left;
+    }
+  </style>
+
+  <h1>Table: Table footer and caption</h1>
+  <table>
+    <caption>List of users</caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">1</td>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <td scope="row">2</td>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <td scope="row">3</td>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <td>Footer</td>
+      <td>Footer</td>
+      <td>Footer</td>
+      <td>Footer</td>
+    </tfoot>
+  </table>   -->
+
+  <!-- <style>
+    table {
+      border-collapse: collapse;
+    }
+    thead {
+      border-bottom: 1px solid;
+    }
+    tbody tr {
+      border-bottom: 1px solid #eee;
+    }
+    td[scope=row] {
+      font-weight: bold;
+    }
+    th, td {
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .table-responsive {
+      /* border: 1px dashed; */
+      overflow-x: scroll;
+    }
+    /* Chrome, Safari, Opera */
+    .table-responsive::-webkit-scrollbar {
+      display: none;
+    }
+    /* IE and Edge */
+    .table-responsive {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+  <h1>Table: Responsive</h1>
+
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Heading</th>
+          <th scope="col">Heading</th>
+          <th scope="col">Heading</th>
+          <th scope="col">Heading</th>
+          <th scope="col">Heading</th>
+          <th scope="col">Heading</th>
+          <th scope="col">Heading</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">1</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+        </tr>
+        <tr>
+          <td scope="row">2</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+        </tr>
+        <tr>
+          <td scope="row">3</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+
+  <!-- <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      /* table-layout: auto; */
+      table-layout: fixed;
+    }
+    th, td {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+    }
+  </style>
+
+  <h1>Table with table-layout: fixed</h1>
+  <table>
+    <colgroup>
+      <col width="40%">
+      <col width="40%">
+      <col width="20%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Song</th>
+        <th>Artist</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>The Sliding Mr.bones (Next Stop, Pottersville)</td>
+        <td>Malcolm Lockyer</td>
+        <td>1961</td>
+      </tr>
+      <tr>
+        <td>Witchy Woman</td>
+        <td>The Eagles</td>
+        <td>1972</td>
+      </tr>
+      <tr>
+        <td>Shining Star</td>
+        <td>Earth, Wind, and Fire</td>
+        <td>1975</td>
+      </tr>
+    </tbody>
+  </table> -->
+
+  <!-- # Dropdown (더보기) -->
+
+  <!-- <style>
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+    }
+    .container {
+      /* border: 1px dashed; */
+      position: relative;
+      display: inline-block;
+    }
+    .container:hover .content {
+      display: block;
+    }
+    button {
+      padding: 0.5rem;
+      cursor: pointer;
+      background-color: #555;
+      color: #fff;
+      border: none;
+    }
+    .content {
+      position: absolute;
+      width: 200px;
+      /* h(bottom, top), required / v(right, left), required / blur / spread / color  */
+      /* 수평(필수) / 수직(필수) / 흐림 / 퍼짐 / 색 */
+      /* bottom / right / blur / color, top / left / blur / color */
+      box-shadow: 1px 1px 3px #eee, -1px -1px 3px #eee;
+      display: none;
+    }
+    ul li {
+      padding: 0.5rem;
+    }
+    ul li:hover {
+      background-color: #eee;
+    }
+  </style>
+
+  <h1>Dropdown</h1>
+
+  <div class="container">
+    <button type="button">Dropdown</button>
+    <div class="content">
+      <ul>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+      </ul>
+    </div>
+  </div> -->
+
+  <!-- # Modal -->
+
+  <!-- <style>
+    .container {
+      position:fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(0 0 0 / 0.2);
+    }
+    .item {
+      background-color: #fff;
+      max-width: 400px;
+      margin: 100px auto 0;
+      padding: 1rem;
+      box-sizing: border-box;
+      position: relative;
+    } 
+    .btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.5rem;
+    }
+  </style>
+
+  <h1>Heading</h1>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    Non odio ratione magnam ea commodi molestiae expedita. 
+    Reiciendis explicabo labore velit ratione sunt maiores recusandae excepturi necessitatibus. 
+    Magni voluptas blanditiis totam!</p>
+
+  <div class="container">
+    <div class="item">
+      <span class="btn">&times;</span>
+      <h1>Modal Content</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Non odio ratione magnam ea commodi molestiae expedita. 
+        Reiciendis explicabo labore velit ratione sunt maiores recusandae excepturi necessitatibus. 
+        Magni voluptas blanditiis totam!</p>
+    </div>
+  </div> -->
+
+  <!-- <style>
+    .container {
+      position:fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0 0 0 / 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .item {
+      background-color: #fff;
+      width: 400px;
+      padding: 1rem;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .btn {
+      position: absolute;
+      top: -3rem;
+      right: 0;
+      padding: 0.5rem;
+      font-size: 2rem;
+    }
+  </style>
+
+  <h1>Heading</h1>
+  <p>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+    Consequuntur unde, tempore minus magnam ipsum aliquam ab repellat accusantium labore, 
+    dolor soluta expedita, asperiores quibusdam natus voluptatem debitis ut. Ipsa, deleniti.
+  </p>
+  <div class="container">
+    <div class="item">
+      <span class="btn">&times;</span>
+      <h1>Modal Content</h1>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+        Consequuntur unde, tempore minus magnam ipsum aliquam ab repellat accusantium labore, 
+        dolor soluta expedita, asperiores quibusdam natus voluptatem debitis ut. Ipsa, deleniti.
+      </p>
+    </div>
+  </div> -->
+
+  <!-- # Navigation (메뉴) -->
+
+  <!-- <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      border: 1px dashed;
+      background-color: #222;
+    }
+    ul {
+      display: flex;
+    }
+    a {
+      display: block;
+      padding: 0.5rem;
+      color: #fff;
+    }
+    a:hover {
+      background-color: #333;
+    }
+  </style>
+
+  <div class="container">
+    <ul>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+    </ul>
+  </div> -->
+
+  <!-- <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      border: 1px dashed;
+      background-color: #222;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      display: block;
+      text-align: center;
+      padding: 0.5rem;
+      color: #fff;
+    }
+    a:hover {
+      background-color: #333;
+    }
+    @media(min-width: 640px) {
+      ul {
+        flex-direction: row;
+      }
+    }
+  </style>
+
+  <div class="container">
+    <ul>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+    </ul>
+  </div> -->
+
+  <!-- <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
+    }
+    .wrap {
+      /* border: 1px dashed; */
+    }
+    ul {
+      display: flex;
+      background-color: #222;
+    }
+    li > a {
+      display: block;
+      padding: 0.5rem;
+      color: #fff;
+    }
+    li > a:hover {
+      background-color: #333;
+    } 
+    .container {
+      /* border: 1px dashed; */
+    }
+    .container:hover .content {
+      display: block;
+    }
+    .container:hover .btn span {
+      transform: rotate(0);
+    }
+    .btn {
+      /* height: 100%; */
+      border: none;
+      font-size: 1rem;
+      background-color: #222;
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #333;
+    }
+    .btn span {
+      font-size: 0.5rem;
+      vertical-align: middle;
+      transform: rotate(180deg);
+      display: inline-block;
+      transition: 0.5s;
+    }
+    .content {
+      border: 1px solid red;
+      position: absolute;
+      width: 200px;
+      border: 1px solid #ddd;
+      display: none;
+    }
+    .content a {
+      display: block;
+      padding: 0.5rem;
+      color: #000;
+    }
+    .content a:hover {
+      background-color: #eee;
+    }
+  </style>
+
+  <div class="wrap">
+    <ul>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+      <li>
+        <a href="#">Menu</a>
+      </li>
+      <li class="container">
+        <button class="btn">Dropdown <span>&#9660;</span></button>
+        <div class="content">
+          <a href="#">Menu</a>
+          <a href="#">Menu</a>
+          <a href="#">Menu</a>
+        </div>
+      </li>
+    </ul>
+  </div> -->
+
+  <!-- # Side Bar -->
+
+  <!-- <style>
+    body {
+      height: 1000px;
+    }
+    .container {
+      border: 1px dashed;
+      position: fixed;
+      width: 200px;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background-color: #222;
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      display: block;
+      color: #fff;
+      padding: 0.75rem;
+    }
+    a:hover {
+      background-color: #333;
+    }
+    .wrap {
+      margin-left: 200px;
+      height: 100%;
+    }
+  </style>
+
+  <div class="container">
+    <ul>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+    </ul>
+  </div>
+
+  <div class="wrap">
+    <h1>Heading</h1>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+      Corrupti incidunt vitae atque! Repellat consequuntur dolore maxime. 
+      Excepturi inventore libero vel voluptas, doloribus, 
+      consequuntur laboriosam autem sint, cupiditate tempora perferendis voluptatibus.</p>
+  </div> -->
+
+  <!-- <style>
+    .container {
+      border: 1px dashed;
+      position: fixed;
+      width: 4rem;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #222;
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      display: block;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #333;
+      color: #fff;
+    }
+    a:hover {
+      background-color: #333;
+    }
+  </style>
+
+  <div class="container">
+    <ul>
+      <li><a href="#">#</a></li>
+      <li><a href="#">#</a></li>
+      <li><a href="#">#</a></li>
+      <li><a href="#">#</a></li>
+    </ul>
+  </div> -->
+
+    <!-- <style>
+    body {
+      height: 1000px;
+    }
+    .container {
+      border: 1px dashed;
+      position: fixed;
+      width: 200px;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background-color: #222;
+      overflow-y: scroll;
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      height: 2000px;
+    }
+    a {
+      display: block;
+      color: #fff;
+      padding: 0.75rem;
+    }
+    a:hover {
+      background-color: #333;
+    }
+    .wrap {
+      margin-left: 200px;
+      height: 100%;
+    }
+  </style>
+
+  <div class="container">
+    <ul>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+    </ul>
+  </div> -->
+
+  <!-- # Responsive Layout -->
+
+  <!-- <style>
+    .wrap {
+      background-color: #222;
+    }
+    h1 {
+      text-align: center;
+    }
+    p {
+      color: #888;
+    }
+    .container {
+      /* border: 1px dashed; */
+      max-width: 540px;
+      margin: auto;
+      color: #fff;
+      padding: 3rem 1rem;
+    }
+  </style>
+
+  <div class="wrap">
+    <div class="container">
+      <h1>Layout: row</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+        Maxime blanditiis consectetur dicta. Suscipit eaque modi ipsum error, 
+        minima explicabo odit similique quos nesciunt distinctio, 
+        dolor accusantium magni, repudiandae fugiat nam!</p>
+    </div>
+  </div> -->
+
+
+  <!-- <style>
+    .container {
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 3rem 1rem;
+      flex-direction: column;
+    }
+    .item:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      background-color: #ddd;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    @media (min-width: 568px) {
+      .container {
+        flex-direction: row;
+      }
+    }
+  </style>
+
+  <div class="wrap">
+    <div class="container">
+      <div class="item">
+        <h1>Heading</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Praesentium exercitationem doloremque distinctio corporis! 
+          Animi quaerat, omnis dicta facilis provident suscipit molestias quae 
+          doloribus magnam quo magni! Architecto quam temporibus accusantium.</p>
+      </div>
+      <div class="item"></div>
+    </div>
+  </div> -->
+
+  <!-- <style>
+    .container {
+      display: flex;
+      max-width: 740px;
+      margin: 0 auto;
+      border-top: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+    .item {
+      width: 100%;
+      padding: 0 1rem;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    @media (min-width: 640px) {
+      .item {
+        width: 50%;
+      }
+    }
+    @media (min-width: 768px) {
+      .item {
+        width: 25%;
+      }
+    }
+  </style>
+
+  <h1>flex with width</h1>
+
+  <div class="container">
+    <div class="item">
+      <h2>Heading</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <div class="item">
+      <h2>Heading</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <div class="item">
+      <h2>Heading</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <div class="item">
+      <h2>Heading</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <div class="item">
+      <h2>Heading</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <div class="item">
+      <h2>Heading</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <div class="item">
+      <h2>Heading</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <div class="item">
+      <h2>Heading</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+  </div> -->
+
+  <!-- <style>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 740px;
+      margin: 0 auto;
+      border-top: 1px solid #ddd;
+    }
+    .item {
+      width: 100%;
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+    ul {
+      
+    }
+    @media (min-width: 640px) {
+      .item {
+        width: 50%;
+      }
+    }
+  </style>
+
+  <h1>flex-wrap: wrap</h1>
+
+  <div class="container">
+    <div class="item">
+      <h2>Heading</h2>
+      <ul>
+        <li>List item</li>
+        <li>List item</li>
+        <li>List item</li>
+      </ul>
+    </div>
+    <div class="item">
+      <h2>Heading</h2>
+      <ul>
+        <li>List item</li>
+        <li>List item</li>
+        <li>List item</li>
+      </ul>
+    </div>
+    <div class="item">
+      <h2>Heading</h2>
+      <ul>
+        <li>List item</li>
+        <li>List item</li>
+        <li>List item</li>
+      </ul>
+    </div>
+  </div> -->
+  
+  <!-- # Image -->
+
+  <!-- <style>
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .container {
+      width: 200px;
+      height: 200px;
+      opacity: 0.9;
+      cursor: pointer;
+    }
+    .container:hover {
+      opacity: 1;    
+    }
+  </style>
+
+  <h1>Basic thumbnails</h1>
+
+  <div class="container">
+    <img src="../../../img/duck.jpeg" alt="">
+  </div> -->
+
+  <!-- <style>
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .container {
+      /* border: 1px dashed; */
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    img {
+      transition: 0.5s;
+    }
+    .container:hover img {
+      transform: scale(1.1, 1.1)
+    }
+  </style>
+  
+  <h1>Scalable thumbnails</h1>
+  <div class="container">
+    <img src="../../../img/duck.jpeg" alt="">
+  </div> -->
+
+  <!-- <style>
+    img {
+      width: inherit;
+      height: inherit;
+      object-fit: cover;
+    }
+    .container {
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+      position: relative;
+    }
+    .item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0 0 0 / 0.5);
+      color: #fff;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: .5s;
+    }
+    .container:hover .item {
+      opacity: 1;
+    }
+  </style>
+
+  <h1>Overlay thumbnails</h1>
+
+  <div class="container">
+    <div class="item">Description</div>
+    <img src="../../../img/duck.jpeg" alt="">
+  </div> -->
+
+  <!-- <style>
+    img {
+      width: inherit;
+      height: inherit;
+      object-fit: cover;
+    }
+    .container {
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+      position: relative;
+    }
+    .item {
+      position: absolute;
+      top: 70%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0 0 0 / 0.5);
+      color: #fff;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: .5s;
+    }
+    .container:hover .item {
+      opacity: 1;
+    }
+  </style>
+
+  <h1>Overlay thumbnails</h1>
+
+  <div class="container">
+    <div class="item">Description</div>
+    <img src="../../../img/duck.jpeg" alt="">
+  </div> -->
+
+  <!-- <style>
+    .container {
+      height: 250px;
+      background-color: #ddd;
+      position: relative;
+      background-image: url("../../../img/duck.jpeg");
+      background-position: center;
+      background-size: cover;
+      /* 회색조 */
+      filter: grayscale(50%);
+    }
+    .item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+
+  <div class="container">
+    <div class="item">
+      <h1>Heading</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+  </div> -->
+
+  <!-- # Animation -->
+
+  <!-- <style>
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid;
+      border-top: 5px solid transparent;
+      border-radius: 50%;
+      /* animation의 이름 */
+      animation-name: spin;
+      /* animation이 한번 실행되는 데(from 에서 to) 걸리는 시간 */
+      animation-duration: 2s;
+      /* animation의 반복횟수  */
+      animation-iteration-count: infinite;
+      /* animation의 시간적인 기능 */
+      animation-timing-function: linear;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      } to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
+  <h1>Spinner</h1>
+  <div class="spinner"></div> -->
+
+  <!-- <style>
+    .container {
+      width: 200px;
+      height: 10px;
+      background-color: #ddd;
+    }
+    .item {
+      height: 100%;
+      background-color: #333;
+      /* animation shorthand (간단하게 쓰기) */
+      /* animation: name duration timing-function delay iteration-count direction fill-mode play-state; */
+      /* animation: fill 2s; */
+      animation: fill 2s ease 0s 1 normal none running;
+    }
+    
+    @keyframes fill {
+      from {
+        width: 0;
+      } to {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <h1>Progress Bar</h1>
+
+  <div class="container">
+    <div class="item"></div>
+  </div> -->
+
+  <!-- <style>
+    .container {
+      width: 50px;
+      height: 50px;
+      /* border: 1px dashed; */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .container .item {
+      width: 50px;
+      height: 4px;
+      background-color: #000;
+      
+      transition: 0.5s;
+    }
+    .container:hover .item:nth-child(2) {
+      opacity: 0;
+    }
+    .container:hover .item:first-child {
+      transform: translateY(23px) rotate(45deg);
+    }
+    .container:hover .item:last-child {
+      transform: translateY(-23px) rotate(-45deg);
+    }
+  </style>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div> -->
+
+
+  <!-- <style>
+    body {
+      margin: 0;
+      position: relative;
+      height: 100vh;
+      background-color: #000;
+    }
+    body > .item {
+      width: 500px;
+      height: 500px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: orangered;
+      border-radius: 50%;
+      box-shadow: 0 0 50px 10px red;
+    }
+    .container {
+      width: 600px;
+      height: 600px;
+      /* border: 1px dashed; */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: orbit 10s infinite linear;
+    }
+    .container .item {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: dodgerblue;
+      box-shadow: 0 0 50px 10px skyblue;
+    }
+
+    @keyframes orbit {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      } to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+  </style>
+
+
+  <div class="item"></div>
+  <div class="container">
+    <div class="item"></div>
+  </div> -->
+
+  <!-- <style>
+    body {
+      display: flex;
+      background-color: #333;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      /* display: flex; */
+      display: inline-flex;
+      /* border: 1px dashed; */
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .item {
+      width: 25px;
+      height: 50px;
+      background-color: #fff;
+      /* border: 1px dashed; */
+      animation-name: wave;
+      animation-duration: 0.6s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      /* 애니메이션의 방향을 처음에서 끝으로 왕복한다 */
+      /* animation-direction: normal / reverse / alternate / alternate-reverse; */
+      animation-direction: alternate;
+    }
+    .item:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .item:last-child {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes wave {
+      from {
+        height: 50px;
+      } to {
+        height: 150px;
+      }
+    }
+  </style>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div> -->
+<style>
+
+  body {
+    margin: 500px;
+  }
+  div {
+
+
+    background-color: #ddd;
+    width: 50px;
+    height: 50px;
+    animation: orbit 1s linear infinite;
+  }
+  
+  @keyframes orbit {
+    0% {
+      -webkit-transform: rotate(0deg) translateX(5px) translateY(120px) rotate(0deg) scale(1);
+    }
+
+    25% {
+      -webkit-transform: rotate(90deg) translateX(5px) translateY(120px) rotate(-90deg) scale(.75);
+    }
+
+    50% {
+      -webkit-transform: rotate(180deg) translateX(5px) translateY(120px) rotate(-180deg) scale(.60);
+    }
+
+    75% {
+      -webkit-transform: rotate(270deg) translateX(5px) translateY(120px) rotate(-270deg) scale(.75);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg) translateX(5px) translateY(120px) rotate(-360deg) scale(1);
+    }
+  }
+</style>
+
+<div class=""></div>
+
+</body>
+</html>

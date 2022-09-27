@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+    <h1>BOM and DOM</h1>
+    <p>BOM: Browser Object Model</p>
+    <p>DOM: Document Object Model</p>
+
+    <script>
+        // Browser Object
+        // console.log(window)
+
+        // window Object의 속성과 메서드는 웹개발에 필요한 툴키트이다
+        // console.log(window.navigator.geolocation)   // 접속한 브라우저의 위치를 알려준다
+        // console.log(window.screen)   // 접속한 유저의 디바이스의 화면 정보
+        // console.log(window.location) // 현재 접속한 웹페이지의 정보 (url 등)
+        // console.log(window.history)  // 유저의 웹브라우징에 관한 기록 등
+        // console.log(window.XMLHttpRequst)   // AJAX 요청 (서버에 데이터를 요청하는 방법)
+
+
+        // Document Object
+        // console.log(window.document)
+    </script>
+     -->
+
+    <!--      
+    <h1>DOM(HTML)에 접근하기</h1>
+    <script>
+        console.log(window.document);
+        console.log(window.document.title);
+        console.log(window.document.body);
+    </script>
+     -->
+
+    <!--      
+    <h1>DOM 선택자</h1>
+    <p>태그이름으로 선택하기</p>
+    <ul>
+        <li>foo</li>
+        <li>bar</li>
+        <li>baz</li>
+    </ul>
+    <script>
+        // querySelector(태그이름) 태그이름으로 element를 선택한다
+        const ul = document.querySelector("ul");
+        // querySelectorAll(태그이름) 태그이름을 가진 모든 element를 선택한다
+        const li = document.querySelectorAll("li");
+        
+        console.log(ul);
+        console.log(li);        // NodeList
+        console.log(li[0]);     // 0번째 item 확인
+        console.log(li.length)  // item의 갯수 확인
+    </script>
+     -->
+
+
+    <!--      
+     <h1>DOM 선택자</h1>
+     <p>id, class</p>
+    
+     <ul>
+        <li id="foo" class="item">foo</li>
+        <li class="item">bar</li>
+        <li class="item">baz</li>
+     </ul>
+     <script>
+        // getElementById(id) : id를 가진 element를 선택한다
+        const foo = document.getElementById("foo");
+        console.log(foo);
+
+        // getElementsByClassName(class) : class를 가진 element를 모두 선택한다
+        const items = document.getElementsByClassName("item");
+        console.log(items); // HTMLCollection
+        console.log(items[0]);
+        console.log(items.length);
+     </script> 
+    -->
+
+
+    <h1>DOM 선택자</h1>
+    <p>id, class로 선택하기 2</p>
+    <ul>
+        <li id="foo" class="item">foo</li>
+        <li class="item">bar</li>
+        <li class="item">baz</li>
+    </ul>
+    <script>
+        // querySelector(#id) : id를 가진 element를 선택한다
+        const foo = document.querySelector("#foo");
+        console.log(foo);
+
+        // querySelectorAll(.class) : class를 가진 element를 모두 선택한다
+        const items = document.querySelectorAll(".item");
+        console.log(items); // NodeList
+    </script>
+</body>
+</html>
