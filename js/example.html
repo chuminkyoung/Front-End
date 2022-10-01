@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- <style>
+        svg {
+            width: 3rem;
+            cursor: pointer;
+        }
+        .fill-red{
+            fill: skyblue;
+        }
+    </style>
+    
+    <h1>좋아요</h1>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 25.3-19.5 46-44.3 47.9c7.7 8.5 12.3 19.8 12.3 32.1c0 23.4-16.8 42.9-38.9 47.1c4.4 7.2 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"/></svg>
+
+    <script>
+        const svg = document.querySelector("svg")
+
+        svg.addEventListener("click", (e) => {
+            // element.classList.toggle(class): element의 classList에 class가 있으면
+            // 제거하고 없으면 추가한다.
+            svg.classList.toggle("fill-red");
+        })
+    </script> -->
+
+
+    <!-- # FORM -->
+    <!-- <h1>Google</h1>
+    <form action="">
+        <input type="text">
+        <button type="submit">submit</button>
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", (e) =>{
+            // 서버에 요청을 전송하지 않음
+            e.preventDefault();
+
+            const input = document.querySelector("input");
+            console.log("검색어: ", input.value);
+        })
+    </script> -->
+
+
+
+    <!-- <h1>Login</h1>
+    <form action="">
+        <div class="">
+            <label for="">Username</label>
+            <input type="text" required>
+        </div>
+        <div class="">
+            <label for="">Password</label>
+            <input type="text" required>
+        </div>
+        <div class="">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <script>
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const inputs = document.querySelectorAll("input");
+
+            const user = {
+                username: inputs[0].value,
+                password: inputs[1].value
+            }
+            console.log("user: ", user);
+        });
+    </script> -->
+
+
+
+    
+    <!-- <h1>비밀번호 검증</h1>
+    <form action="">
+        <div>
+            <label for="">Password</label>
+            <input type="text">
+        </div>
+        <p>비밀번호를 입력하세요</p>
+    </form>
+    <script>
+        const input = document.querySelector("input");
+
+        // keyup: 키보드 버튼이 눌렸을 때 
+        input.addEventListener("keyup", (e) => {
+            const p = document.querySelector("p");
+
+            console.log(e.target.value);
+
+            if(!e.target.value) {   // !"" 
+                p.textContent = "비밀번호를 입력해주세요"
+            }else if(e.target.value.length < 6){
+                p.textContent = "비밀번호가 안전하지 않습니다"
+            }else{
+                p.textContent = "비밀번호가 안전합니다"
+            }
+        })
+    </script> -->
+
+
+
+    <h1>CU 관리자 페이지</h1>
+    <form action="">
+        <div>
+            <label for=""></label>
+            <input type="text" placeholder="예) 기네스, 아일랜드 맥주">
+            <button type="submit">등록</button>
+        </div>
+        <ul></ul>
+    </form>
+    <script>
+        const input = document.querySelector("input");
+        const form  = document.querySelector("form");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const ul = document.querySelector("ul");
+            const li = document.createElement("li");
+            
+            li.textContent = input.value
+            ul.appendChild(li);
+            console.log();
+        })
+    </script>
+
+</body>
+</html>
