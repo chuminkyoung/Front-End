@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        window.addEventListener("DOMContentLoaded", function(){
+            const addEl = document.getElementById("add"); // 추가
+            addEl.addEventListener("click", function(){
+                const tpl = document.getElementById("tpl").innerHTML;
+                console.log(tpl);   // -> 이건 html 인식 못함
+
+                const domParser = new DOMParser(); // -> DOM객체로 인식
+                const dom = domParser.parseFromString(tpl, "text/html");
+                console.log(dom);
+
+                // 추가!
+                const liEl = dom.querySelector("li");
+                const targetEl = document.querySelector("#frm ul");
+                targetEl.appendChild(liEl);
+            });
+            
+
+            // 삭제!!
+            const removeEl = document.getElementById("remove");
+            removeEl.addEventListener("click", function(){
+                const targetEl = document.querySelector("#frm ul");
+                const liEl = targetEl.lastElementChild;
+                targetEl.removeChild(liEl);
+            });
+        })
+    </script>
+    <button type="button" id="add">추가!</button>
+    <button type="button" id="remove">삭제</button>
+    <form method="post" id="frm">
+        <ul></ul>
+    </form>
+    <script type="text/html" id="tpl">
+        <li>
+            이름 : <input type="text"><br>
+            전화번호 : <input type="text">
+        </li>
+    </script>
+</body>
+</html>
