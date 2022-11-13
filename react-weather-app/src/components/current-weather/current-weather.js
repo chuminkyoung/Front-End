@@ -1,38 +1,30 @@
-import "./current-weather.css"
 
+// 상단 날씨
 const CurrentWeather = ({data}) => {
+    
+    const todayTime = () => {
+        let now = new Date();  // 현재 날짜 및 시간
+        let todayYear = now.getFullYear(); 
+        let todayMonth = now.getMonth() + 1;
+        let todayDate = now.getDate();
+        const week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+        let dayOfWeek = week[now.getDay()];
+
+        return dayOfWeek + ', ' + todayYear + '.' + todayMonth + '.' + todayDate
+    }
+
     return (
         <div className="weather">
+            {/* <p className="city_name">{data.city} 날씨</p> */}
+            
             <div className="top">
-                <div>
-                    <p className="city">{data.city}</p>
-                    <p className="weather-description">{data.weather[0].description}</p>
-                </div>
                 <img alt="weather" className="weather-icon" src={`icons/${data.weather[0].icon}.svg`} />
             </div>
             <div className="bottom">
-                <p className="temperature">{Math.round(data.main.temp)}°C</p>
-                <div className="details">
-                    <div className="parameter-row">
-                        <span className="parameter-label">Details</span>
-                    </div>
-                    <div className="parameter-row">
-                        <span className="parameter-label">Feels like</span>
-                        <span className="parameter-value">{Math.round(data.main.feels_like)}°C</span>
-                    </div>
-                    <div className="parameter-row">
-                        <span className="parameter-label">Wind</span>
-                        <span className="parameter-value">{data.wind.speed} m/s</span>
-                    </div>
-                    <div className="parameter-row">
-                        <span className="parameter-label">Humidity</span>
-                        <span className="parameter-value">{data.main.humidity}%</span>
-                    </div>
-                    <div className="parameter-row">
-                        <span className="parameter-label">Pressure</span>
-                        <span className="parameter-value">{data.main.pressure} hPa</span>
-                    </div>
-                </div>
+                <p className="temperature">{Math.round(data.main.feels_like)}°C</p>
+                <p class="today">
+                    {todayTime()}
+                </p>
             </div>
         </div>
     );

@@ -1,7 +1,6 @@
 import React from "react";
-import "./forecast.css";
 
-const WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const WEEK_DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 const Forecast = ({ data }) => {
   const dayInAWeek = new Date().getDay();
@@ -9,19 +8,20 @@ const Forecast = ({ data }) => {
   
   return (
     <>
-      <label className="title">Daily</label>
-     
+      <div className="daily-box">
         {data.list.splice(0, 7).map((item, idx) => (
-          
-            <div className="daily-item">
+          <div className="daily-item">
+              <p className="day">{forecastDays[idx]}</p>
+              <p className="img">
                 <img src={`icons/${item.weather[0].icon}.svg`} className="icon-small" alt="weather" />
-                <label className="day">{forecastDays[idx]}</label>
-                <label className="description">{item.weather[0].description}</label>
-                <label className="min-max">{Math.round(item.main.temp_max)}°C /{Math.round(item.main.temp_min)}°C</label>
-            </div>
-
+              </p>
+              {/* <label className="description">{item.weather[0].description}</label> */}
+              <div className="min-max">
+                <p className="max">{Math.round(item.main.feels_like)}°</p> / <p className="min">{Math.round(item.main.temp_min)}°</p>
+              </div>
+          </div>
         ))}
-   
+      </div>
     </>
   );
 };
