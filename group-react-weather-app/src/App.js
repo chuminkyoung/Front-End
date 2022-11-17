@@ -1,14 +1,27 @@
 /* global kakao */
-import React, {useState, useContext, useEffect, useRef, Component, FunctionComponent,} from "react";
-
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useRef,
+  Component,
+  FunctionComponent,
+} from "react";
 import "./App.css";
-import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList,
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  LabelList,
 } from "recharts";
 import { PieChart } from "react-minimal-pie-chart";
 import moment from "moment";
 import { Map, MapInfoWindow, MapMarker } from "react-kakao-maps-sdk";
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1cb2c6c06ebd31765e0e78e52f467a6"></script>
 
 function Kmap(){
   const [error, setError] = useState(null);
@@ -204,235 +217,10 @@ function KakaoMap(props) {
 }
 
 
-// 민경
-let isLoaded = false;
-
-// 지역 버튼
-const Search = ({ onSearchChange }) => {
-  const [search, setSearch] = useState(null);
-  // Seoul, KR
-
-  const loadOptions = (inputValue) => {
-    return fetch(
-      `${GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`,
-      geoApiOptions
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        return {
-          options: response.data.map((city) => {
-            return {
-              value: `${city.latitude} ${city.longitude}`,
-              label: `${city.name}, ${city.countryCode}`,
-            };
-          }),
-        };
-      })
-      .catch((err) => console.error(err))
-  };
-
-  const handleOnchange = (searchData) => {
-    setSearch(searchData);
-    onSearchChange(searchData);
-  };
-  
-  const handleOnClick = (e) => {
-  const selEls = document.getElementsByClassName("selectCity");
-    for(const el of selEls){
-      el.classList.remove("on");
-    }
-
-    const el = e.currentTarget;
-    el.classList.add("on");
-
-    const city = el.dataset.city;
-
-    let searchData = {};
-    switch (city) {
-      case "Incheon":
-        searchData = { label: "Incheon", value: "37.463888888 126.648611111" };
-        break;
-      case "Jeju":
-        searchData = { label: "Jeju", value: "33.1127 126.0843" };
-        break;
-      case "Busan":
-        searchData = { label: "Busan", value: "35.1795543 129.0756416" };
-        break;
-      case "Gwangju":
-        searchData = { label: "Gwangju", value: "35.1595454 126.8526012" };
-        break;
-      case "Daegu":
-        searchData = { label: "Daegu", value: "35.8714354 128.601445" };
-        break;
-      case "Daejeon":
-        searchData = { label: "Daejeon", value: "36.3504119 127.3845475" };
-        break;
-      default:
-        searchData = { label: "Seoul", value: "37.56 126.99" };
-    }
-    setSearch(searchData);
-    onSearchChange(searchData);
-    
-    // 차트
-    const CityData = "Seoul"
-
-  };
-
-  // 버튼 on 효과
- const [currentClick, setCurrentClick] = React.useState(null);
- const [prevClick, setPrevClick] = React.useState(null);
-
-
- React.useEffect(
-  (e) => {
-    const btn_on = document.querySelector("#case1");
-    
-      if (currentClick !== null) {
-        let current = document.getElementById(currentClick);
-        console.log(current);
-        current.className = "on";
-      }
-
-      if (prevClick !== null) {
-        let prev = document.getElementById(prevClick);
-        prev.className = " ";
-      }
-      setPrevClick(currentClick);
-    },
-    [currentClick]
-  );
-  // 버튼 on 효과 end
-
-  
-  console.log(search)
-
-  return (
-    <div class="button_box">
-      <button id="case1"
-        type="button"
-        className="on selectCity"
-        data-city="
-       "
-        onClick={handleOnClick}
-      >
-        SEOUL
-      </button>
-      <button id="case2" className="selectCity" type="button" data-city="Incheon" onClick={handleOnClick}>
-        INCHEON
-      </button>
-      <button id="case3" className="selectCity" type="button" data-city="Gwangju" onClick={handleOnClick}>
-        GWANGJU
-      </button>
-      <button id="case4" className="selectCity" type="button" data-city="Busan" onClick={handleOnClick}>
-        BUSAN
-      </button>
-      <button id="case5" className="selectCity" type="button" data-city="Daegu" onClick={handleOnClick}>
-        DAEGU
-      </button>
-      <button id="case6" className="selectCity" type="button" data-city="Daejeon" onClick={handleOnClick}>
-        DAEJEON
-      </button>
-      <button id="case7" className="selectCity" type="button" data-city="Jeju" onClick={handleOnClick}>
-        JEJU
-      </button>
-    </div>
-  );
-};
-// 지역 버튼 end
-
-// 요일
-const WEEK_DAYS = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
-
-const Forecast = ({ data }) => {
-  const dayInAWeek = new Date().getDay();
-  const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(
-    WEEK_DAYS.slice(0, dayInAWeek)
-  );
-
-  return (
-    <>
-      <div className="daily-box">
-        {data.list.splice(0, 7).map((item, idx) => (
-          <div className="daily-item">
-            <p className="day">{forecastDays[idx]}</p>
-            <p className="img">
-              <img
-                src={`icons/${item.weather[0].icon}.svg`}
-                className="icon-small"
-                alt="weather"
-              />
-            </p>
-            {/* <label className="description">{item.weather[0].description}</label> */}
-            <div className="min-max">
-              <p className="max">{Math.round(item.main.feels_like)}°</p> /{" "}
-              <p className="min">{Math.round(item.main.temp_min)}°</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-};
-// 요일 end
-
-// 상단 날씨
-const CurrentWeather = ({ data }) => {
-  console.log(data)
-  const todayTime = () => {
-    let now = new Date(); // 현재 날짜 및 시간
-    let todayYear = now.getFullYear();
-    let todayMonth = now.getMonth() + 1;
-    let todayDate = now.getDate();
-    const week = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-    let dayOfWeek = week[now.getDay()];
-
-    return dayOfWeek + ", "; // + todayYear + '.' + todayMonth + '.' + todayDate
-  };
-
-  // 시간
-  const [timer, setTimer] = useState("00:00");
-
-  const currentTimer = () => {
-    const date = new Date();
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    setTimer(`${hours}:${minutes}`);
-  };
-
-  const startTimer = () => {
-    setInterval(currentTimer, 1000);
-  };
-
-  startTimer();
-  // 시간 end
-
-  return (
-    <div className="weather">
-      {/* <p className="city_name">{String(data.city)} 날씨</p> */}
-
-      <div className="top">
-        <img
-          alt="weather"
-          className="weather-icon"
-          src={`icons/${data.weather[0].icon}.svg`}
-        />
-      </div>
-      <div className="bottom">
-        <p className="temperature">{Math.round(data.main.feels_like)}°C</p>
-        <p class="today">
-          {todayTime()}
-          {timer}
-        </p>
-      </div>
-    </div>
-  );
-
-};
-// 상단 날씨 end
-
 
 
 const apiKey = "4fcaac8b610bc6ced5f4f237234080dd";
+
 
 function fetchData(data) {
   
@@ -454,49 +242,25 @@ function fetchData(data) {
   return promise;
 }
   
+
+// 버튼 on 효과
+function buttonStateChange(e) {
+  const selectCityEls = document.getElementsByClassName("selectCity");
+  for (const el of selectCityEls) {
+    el.classList.remove("on");
+  }
+
+  const el = e.currentTarget;
+  el.classList.add("on");
+}
+// 버튼 on 효과 end
+
 function App() {
-  // 민경
-  useEffect(() => {
-    try {
-      if (!isLoaded) {
-        handleOnSearchChange({ label: "Seoul", value: "37.56 126.99" });
-        isLoaded = true;
-      }
-    } catch (err) {}
-  });
-
-  const [currentWeather, setCurrentWeather] = useState(null);
-  const [forecast, setForecast] = useState(null);
-
-  const handleOnSearchChange = (searchData) => {
-    const [lat, lon] = searchData.value.split(" ");
-
-    const currentWeatherFetch = fetch(
-      `${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&lang=kr&appid=${WEATHER_API_KEY}&units=metric`
-    );
-    const forecastFetch = fetch(
-      `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&lang=kr&appid=${WEATHER_API_KEY}&units=metric`
-    );
-
-    Promise.all([currentWeatherFetch, forecastFetch])
-      .then(async (response) => {
-        const weatherResponse = await response[0].json();
-        const forecastResponse = await response[1].json();
-
-        setCurrentWeather({ city: searchData.label, ...weatherResponse });
-        //setForecast({ city: searchData.label, ...forecastResponse });
-      })
-      .catch((err) => console.log(err));
-  };
-  
-  
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("Seoul");
-  
-  console.log(data);
-  
+
   useEffect(() => {
 
     fetchData(city)
@@ -515,31 +279,15 @@ function App() {
   if (!isLoaded) {
     return <p>fetching data...</p>;
   }
-  return (
-    // <div style={{ margin: "1rem" }}>
-    //   <div>
-    //     <h2>Chart</h2>
-    //     <div style={{ height: "200px" }}>
-    //       <Rechart data={data} />
-    //       {/* {data.list[0].main.temp} */}
-    //     </div>
-    //   </div>
 
-    //   <div style={{
-    //     paddingTop: '200px',
-    //     width: '200px',
-    //     height: '200px',
-    //   }}>
-    //     <Chart />
-    //   </div>
-    // </div>
+  return (
     <>
       <div class="layout-content">
         <div class="layout-menu">
 
           <div class="main-inner">
-            {currentWeather && <CurrentWeather data={currentWeather} />}
-
+            {/* {currentWeather && <CurrentWeather data={currentWeather} />} */}
+            <TodayMain data={data} />
             <hr />
 
             <ul class="weather-text">
@@ -567,7 +315,7 @@ function App() {
                 />
               </div>
               <div class="city-text">
-                <p>Weather of Korea</p>
+                <p>{data.city.name}</p>
               </div>
             </div>
           </div>
@@ -575,7 +323,27 @@ function App() {
 
         <div class="layout-page">
           <div class="top-item">
-            <Search onSearchChange={handleOnSearchChange} />
+            <button className="selectCity on" onClick={(e) => { 
+                buttonStateChange(e);
+                return setCity("Seoul"); }}>SEOUL</button>
+            <button className="selectCity" onClick={(e) => {
+               buttonStateChange(e);
+              return setCity("Incheon"); }}>INCHEON</button>
+            <button className="selectCity" onClick={(e) => { 
+               buttonStateChange(e);
+              return setCity("Gwangju"); }}>GWANGJU</button>
+            <button className="selectCity" onClick={(e) => { 
+               buttonStateChange(e);
+              return setCity("Daejeon"); }}>DAEJEON</button>
+            <button className="selectCity" onClick={(e) => {
+               buttonStateChange(e);
+              return setCity("Daegu"); }}>DAEGU</button>
+            <button className="selectCity" onClick={(e) => { 
+               buttonStateChange(e);
+              return setCity("Busan"); }}>BUSAN</button>
+            <button className="selectCity" onClick={(e) => { 
+               buttonStateChange(e);
+              return setCity("Jeju"); }}>JEJU</button>
             <div class="today-text">
               <Datetext data={data} />
             </div>
@@ -584,7 +352,8 @@ function App() {
           <div class="content-wrapper">
             <div class="row">
               <div class="item1">
-                {forecast && <Forecast data={forecast} />}
+                {/* {forecast && <Forecast data={forecast} />} */}
+                <WeatherTop data={data} />
               </div>
 
               <div class="blank2">&nbsp; </div>
@@ -610,13 +379,12 @@ function App() {
 
               <div class="down">
                 <div class="item3">
-                  <Rechart data={data} />
+                  <Rechart data={data} city={city} />
                 </div>
 
                 <div class="blank2">&nbsp; </div>
 
                 <div class="item4">
-                  {/* 지도 넣기 */}
                   <Kmap/>
                 </div>
               </div>
@@ -643,16 +411,11 @@ function Datetext(props) {
 
 // CHART
 function Rechart(props) {
+  console.log(props);
 
   const list = props.data.list;
 
-  // list[0].dt_txt
-
-  // list[0].name = "Heineken"
-
-  // name: list[1].dt_txt,
-
-  // time = moment().format('HH:mm')
+  console.log(list);
 
   const data = [
     {
@@ -805,19 +568,150 @@ const WindStatus = (props) => {
   )
 }
 
-// 민경
-export const geoApiOptions = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "af7623efffmsh7adfbde82f65247p1206b9jsn7841b45f062e",
-    "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
-  },
-};
 
-export const GEO_API_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo";
+// 상단 날씨 아이콘
+const TodayMain = (props) => {
 
-export const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5";
-export const WEATHER_API_KEY = "7cfb4fd4d5e9110ac1b68b623f95f08b";
-// api end
+  console.log(props)
+
+  const list = props.data.list;
+
+  console.log(list);
+
+  const todayTime = () => {
+    let now = new Date(); // 현재 날짜 및 시간
+    let todayYear = now.getFullYear();
+    let todayMonth = now.getMonth() + 1;
+    let todayDate = now.getDate();
+    const week = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+    let dayOfWeek = week[now.getDay()];
+
+    return dayOfWeek + ", "; // + todayYear + '.' + todayMonth + '.' + todayDate
+  };
+
+  // 시간
+  const [timer, setTimer] = useState("00:00");
+
+  const currentTimer = () => {
+    const date = new Date();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    setTimer(`${hours}:${minutes}`);
+  };
+
+  const startTimer = () => {
+    setInterval(currentTimer, 1000);
+  };
+
+  startTimer();
+  // 시간 end
+
+  return (
+    <>
+      <div className="top">
+        <img className="todayicon" src={`icons/${list[3].weather[0].icon}.svg`}/>
+        <h1 className="todayh1">{Math.round(list[3].main.temp)}°C</h1>
+        <p className=""></p>
+      </div>
+      <div className="bottom">
+        <p class="today">
+          {todayTime()}
+          {timer}
+        </p>
+      </div>
+    </>
+  )
+}
+
+const WeatherTop = (props) => {
+
+  console.log(props)
+
+  const list = props.data.list;
+
+  console.log(list);
+
+  return (
+    <>
+        <div className="daily-item">
+          <div className="daily-0">
+            <h3>{moment(list[2].dt_txt).format("HH:mm")}</h3>
+            <img className="icon-small" src={`icons/${list[2].weather[0].icon}.svg`}/>
+            <div className="min-max">
+              <p className="max">{Math.round(list[2].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[2].main.feels_like)}°</p>
+            </div> 
+          </div>
+          <div className="daily-1">
+            <h3>{moment(list[3].dt_txt).format("HH:mm")}</h3>
+            <img className="icon-small" src={`icons/${list[3].weather[0].icon}.svg`}/>
+            <div className="min-max">
+              <p className="max">{Math.round(list[3].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[3].main.feels_like)}°</p>
+            </div> 
+          </div>
+          <div className="daily-2">
+            <h3>{moment(list[4].dt_txt).format("HH:mm")}</h3>
+            <img className="icon-small" src={`icons/${list[4].weather[0].icon}.svg`}/>
+            <div className="min-max">
+              <p className="max">{Math.round(list[4].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[4].main.feels_like)}°</p>
+            </div> 
+          </div>
+          <div className="daily-3">
+            <h3>{moment(list[5].dt_txt).format("HH:mm")}</h3>
+            <img className="icon-small" src={`icons/${list[5].weather[0].icon}.svg`}/>
+            <div className="min-max">
+              <p className="max">{Math.round(list[5].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[5].main.feels_like)}°</p>
+            </div> 
+          </div>
+          <div className="daily-4">
+            <h3>{moment(list[6].dt_txt).format("HH:mm")}</h3>
+            <img className="icon-small" src={`icons/${list[6].weather[0].icon}.svg`}/>
+            <div className="min-max">
+              <p className="max">{Math.round(list[6].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[6].main.feels_like)}°</p>
+            </div> 
+          </div>
+          <div className="daily-5">
+            <h3>{moment(list[7].dt_txt).format("HH:mm")}</h3>
+            <img className="icon-small" src={`icons/${list[7].weather[0].icon}.svg`}/>
+            <div className="min-max">
+              <p className="max">{Math.round(list[7].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[7].main.feels_like)}°</p>
+            </div> 
+          </div>
+          <div className="daily-6">
+            <h3>{moment(list[8].dt_txt).format("HH:mm")}</h3>
+            <img className="icon-small" src={`icons/${list[8].weather[0].icon}.svg`}/>
+            <div className="min-max">
+              <p className="max">{Math.round(list[8].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[8].main.feels_like)}°</p>
+            </div> 
+          </div>
+          <div className="daily-7">
+            <h3>{moment(list[9].dt_txt).format("HH:mm")}</h3>
+            <img className="icon-small" src={`icons/${list[9].weather[0].icon}.svg`}/>
+            <div className="min-max">
+              <p className="max">{Math.round(list[9].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[9].main.feels_like)}°</p>
+            </div> 
+          </div>
+        </div>
+    </>
+  )
+
+}
+
+
 
 export default App;
