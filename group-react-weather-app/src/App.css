@@ -54,7 +54,8 @@ body {
 }
 .layout-content {
   display: flex;
-  flex: 1 1 auto;
+  width: 95vw;
+  /* flex: 1 1 auto; */
   background: linear-gradient( 90deg, #fff 22%,rgb(245, 245, 245) 22%);
   border-radius: 3rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
@@ -63,6 +64,10 @@ body {
 .layout-menu {
   justify-content: center;
   align-items: center;
+}
+.layout-page {
+  max-width: 1500px;
+  margin: 0 auto;
 }
 .search-box {
   padding-bottom: 2.5rem;
@@ -79,11 +84,15 @@ button {
   font-style: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 1.2rem;
-  color: #666;
+  color: #aaa;
+  cursor: pointer;
 }
 button:hover {
   opacity: 70%;
   font-weight: 600;
+  color: #000;
+}
+button:active {
   color: #000;
   border-bottom: 1.5px solid #000;
 }
@@ -219,11 +228,14 @@ ul li span {
 .daily-item p {
   margin-top: 0;
 }
-.daily-item .min-max  {
+.daily-item .temp-text  {
   display: flex;
   justify-content: center;
   text-align: center;
   width: 100%;
+}
+.daily-item .temp-text .feels-like {
+  color: #aaa;
 }
 .blank {
   padding-top: 20px;
@@ -234,6 +246,9 @@ ul li span {
 }
 .map-text {
   padding-left: 730px;
+}
+.map-text2 {
+  display: none;
 }
 .item2 {
   display: flex;
@@ -299,6 +314,12 @@ ul li span {
 .blank3 {
   padding: 0 5px;
 }
+.blank4 {
+  padding: 0 10px;
+}
+.blank5 {
+  display: none;
+}
 .item4 {
   display: flex;
   width: 30%;
@@ -307,4 +328,146 @@ ul li span {
   overflow: hidden;
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+@media (max-width: 800px) {
+  body {
+    padding: 0rem;
+  }
+  .layout-content {
+    display: block;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 0rem;
+  }
+  hr {
+    /* display: none; */
+  }
+  .main-inner {
+    padding: 0 0 30px 0;
+  }
+  .top-item {
+    border-top: 1px solid #aaa;
+    padding: 20px 0 0 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .city-box {
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .city-img {
+    transform:scale(1.2);
+  }
+  .content-wrapper {
+    padding: 0;
+  }
+  .row {
+    justify-content: center;
+  }
+  .down {
+    display: block;
+  }
+  .item1 {
+    width: 95%;
+    margin: 20px 0px 30px 0px;
+  }
+  .blank2 {
+    display: none;
+  }
+  .blank5 {
+    display: block;
+    padding-top: 5px;
+  }
+  .item2 {
+    width: 45%;
+  }
+  .item2-2 {
+    width: 45%;
+  }
+  .item3 {
+    width: 100%;
+    overflow: scroll;
+  }
+  .item4 {
+    width: 100%;
+    overflow: scroll;
+  }
+  .daily-item {
+    overflow: scroll;
+    flex-wrap: nowrap;
+    border-radius: 0;
+  }
+  .top {
+    margin: 0 auto;
+  }
+  .todayimg {
+    display: flex;
+    justify-content: center;
+  }
+  .todayicon {
+    width: 80%;
+    height: 80%;
+    justify-content: center;
+    padding: 0;
+  }
+  .blank {
+    padding-left: 10px;
+  }
+  .blank h3 {
+    font-weight: 500;
+    font-size: 1.3rem;
+  }
+  .weather-text {
+    padding-left: 70px;
+  }
+  .today-text {
+    padding: 0;
+  }
+  .map-text {
+    padding: 0;
+    display: none;
+  }
+  .map-text2 {
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1.3rem;
+    padding-left: 10px;
+  }
+  .top-item {
+    padding: 30px 0 10px 0px;
+  }
+  .today-text {
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+  }
+  button {
+    border: none;
+    background: none;
+    font-style: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #aaa;
+    cursor: pointer;
+  }
+  button:hover {
+    font-weight: 600;
+    color: #000;
+  }
+  button:active {
+    color: #000;
+    border-bottom: 1.5px solid #000;
+  }
+  button.on{
+    font-weight: 600;
+    color: #000;
+    border-bottom: 1.5px solid #000;
+  }
 }

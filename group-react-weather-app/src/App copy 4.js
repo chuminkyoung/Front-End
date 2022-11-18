@@ -221,6 +221,7 @@ function KakaoMap(props) {
 
 const apiKey = "4fcaac8b610bc6ced5f4f237234080dd";
 
+
 function fetchData(data) {
   
   console.log(data);
@@ -240,6 +241,7 @@ function fetchData(data) {
 
   return promise;
 }
+  
 
 // 버튼 on 효과
 function buttonStateChange(e) {
@@ -252,17 +254,13 @@ function buttonStateChange(e) {
   el.classList.add("on");
 }
 // 버튼 on 효과 end
-  
 
 function App() {
-  
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("Seoul");
 
-  console.log(data);
-  
   useEffect(() => {
 
     fetchData(city)
@@ -281,6 +279,7 @@ function App() {
   if (!isLoaded) {
     return <p>fetching data...</p>;
   }
+
   return (
     <>
       <div class="layout-content">
@@ -312,11 +311,11 @@ function App() {
                   src="../../img/seoul.webp"
                   alt=""
                   width="300px"
-                  height="250px"
+                  height="300px"
                 />
               </div>
               <div class="city-text">
-                <p>Weather of Korea</p>
+                <p>{data.city.name}</p>
               </div>
             </div>
           </div>
@@ -371,6 +370,8 @@ function App() {
                 <Chart class="humidity" data={data}/>
               </div>
 
+
+
               <div class="blank">
                 <h3>Today's Chart</h3>
                 <h3 class="map-text">Map</h3>
@@ -381,13 +382,11 @@ function App() {
                   <Rechart data={data} city={city} />
                 </div>
 
-                <div class="blank4">&nbsp; </div>
-                <h3 class="map-text2">Map</h3>
+                <div class="blank2">&nbsp; </div>
 
                 <div class="item4">
                   <Kmap/>
                 </div>
-                <div class="blank5"></div>
               </div>
             </div>
           </div>
@@ -419,6 +418,18 @@ function Rechart(props) {
   console.log(list);
 
   const data = [
+    {
+      name: moment(list[0].dt_txt).format("HH:mm"),
+      Tomorrow: Math.round(list[8].main.temp),
+      Today: Math.round(list[0].main.temp),
+      amt: 22,
+    },
+    {
+      name: moment(list[1].dt_txt).format("HH:mm"),
+      Tomorrow: Math.round(list[9].main.temp),
+      Today: Math.round(list[1].main.temp),
+      amt: 22,
+    },
     {
       name: moment(list[2].dt_txt).format("HH:mm"),
       Tomorrow: Math.round(list[10].main.temp),
@@ -455,30 +466,18 @@ function Rechart(props) {
       Today: Math.round(list[7].main.temp),
       amt: 24,
     },
-    {
-      name: moment(list[8].dt_txt).format("HH:mm"),
-      Tomorrow: Math.round(list[16].main.temp),
-      Today: Math.round(list[8].main.temp),
-      amt: 22,
-    },
-    {
-      name: moment(list[9].dt_txt).format("HH:mm"),
-      Tomorrow: Math.round(list[17].main.temp),
-      Today: Math.round(list[9].main.temp),
-      amt: 22,
-    },
   ];
-  
+
   const CustomizedLabel: FunctionComponent<any> = (props: any) => {
     const { x, y, stroke, value } = props;
-    
+
     return (
       <text x={x} y={y} dy={-4} fill={stroke} fontSize={16} textAnchor="middle">
         {value}°
       </text>
     );
   };
-  
+
   const CustomizedAxisTick: FunctionComponent<any> = (props: any) => {
     const { x, y, payload } = props;
 
@@ -610,10 +609,8 @@ const TodayMain = (props) => {
   return (
     <>
       <div className="top">
-        <div className="todayimg">
-          <img className="todayicon" src={`icons/${list[2].weather[0].icon}.svg`}/>
-        </div>
-        <h1 className="todayh1">{Math.round(list[2].main.temp)}°C</h1>
+        <img className="todayicon" src={`icons/${list[3].weather[0].icon}.svg`}/>
+        <h1 className="todayh1">{Math.round(list[3].main.temp)}°C</h1>
         <p className=""></p>
       </div>
       <div className="bottom">
@@ -625,8 +622,6 @@ const TodayMain = (props) => {
     </>
   )
 }
-
-// 시간 날씨
 
 const WeatherTop = (props) => {
 
@@ -642,73 +637,73 @@ const WeatherTop = (props) => {
           <div className="daily-0">
             <h3>{moment(list[2].dt_txt).format("HH:mm")}</h3>
             <img className="icon-small" src={`icons/${list[2].weather[0].icon}.svg`}/>
-            <div className="temp-text">
-              <p className="temp">{Math.round(list[2].main.temp)}°</p>
-              <p>&nbsp;</p>
-              <p className="feels-like">{Math.round(list[2].main.feels_like)}°</p>
+            <div className="min-max">
+              <p className="max">{Math.round(list[2].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[2].main.feels_like)}°</p>
             </div> 
           </div>
           <div className="daily-1">
             <h3>{moment(list[3].dt_txt).format("HH:mm")}</h3>
             <img className="icon-small" src={`icons/${list[3].weather[0].icon}.svg`}/>
-            <div className="temp-text">
-              <p className="temp">{Math.round(list[3].main.temp)}°</p>
-              <p>&nbsp;</p>
-              <p className="feels-like">{Math.round(list[3].main.feels_like)}°</p>
+            <div className="min-max">
+              <p className="max">{Math.round(list[3].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[3].main.feels_like)}°</p>
             </div> 
           </div>
           <div className="daily-2">
             <h3>{moment(list[4].dt_txt).format("HH:mm")}</h3>
             <img className="icon-small" src={`icons/${list[4].weather[0].icon}.svg`}/>
-            <div className="temp-text">
-              <p className="temp">{Math.round(list[4].main.temp)}°</p>
-              <p>&nbsp;</p>
-              <p className="feels-like">{Math.round(list[4].main.feels_like)}°</p>
+            <div className="min-max">
+              <p className="max">{Math.round(list[4].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[4].main.feels_like)}°</p>
             </div> 
           </div>
           <div className="daily-3">
             <h3>{moment(list[5].dt_txt).format("HH:mm")}</h3>
             <img className="icon-small" src={`icons/${list[5].weather[0].icon}.svg`}/>
-            <div className="temp-text">
-              <p className="temp">{Math.round(list[5].main.temp)}°</p>
-              <p>&nbsp;</p>
-              <p className="feels-like">{Math.round(list[5].main.feels_like)}°</p>
+            <div className="min-max">
+              <p className="max">{Math.round(list[5].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[5].main.feels_like)}°</p>
             </div> 
           </div>
           <div className="daily-4">
             <h3>{moment(list[6].dt_txt).format("HH:mm")}</h3>
             <img className="icon-small" src={`icons/${list[6].weather[0].icon}.svg`}/>
-            <div className="temp-text">
-              <p className="temp">{Math.round(list[6].main.temp)}°</p>
-              <p>&nbsp;</p>
-              <p className="feels-like">{Math.round(list[6].main.feels_like)}°</p>
+            <div className="min-max">
+              <p className="max">{Math.round(list[6].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[6].main.feels_like)}°</p>
             </div> 
           </div>
           <div className="daily-5">
             <h3>{moment(list[7].dt_txt).format("HH:mm")}</h3>
             <img className="icon-small" src={`icons/${list[7].weather[0].icon}.svg`}/>
-            <div className="temp-text">
-              <p className="temp">{Math.round(list[7].main.temp)}°</p>
-              <p>&nbsp;</p>
-              <p className="feels-like">{Math.round(list[7].main.feels_like)}°</p>
+            <div className="min-max">
+              <p className="max">{Math.round(list[7].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[7].main.feels_like)}°</p>
             </div> 
           </div>
           <div className="daily-6">
             <h3>{moment(list[8].dt_txt).format("HH:mm")}</h3>
             <img className="icon-small" src={`icons/${list[8].weather[0].icon}.svg`}/>
-            <div className="temp-text">
-              <p className="temp">{Math.round(list[8].main.temp)}°</p>
-              <p>&nbsp;</p>
-              <p className="feels-like">{Math.round(list[8].main.feels_like)}°</p>
+            <div className="min-max">
+              <p className="max">{Math.round(list[8].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[8].main.feels_like)}°</p>
             </div> 
           </div>
           <div className="daily-7">
             <h3>{moment(list[9].dt_txt).format("HH:mm")}</h3>
             <img className="icon-small" src={`icons/${list[9].weather[0].icon}.svg`}/>
-            <div className="temp-text">
-              <p className="temp">{Math.round(list[9].main.temp)}°</p>
-              <p>&nbsp;</p>
-              <p className="feels-like">{Math.round(list[9].main.feels_like)}°</p>
+            <div className="min-max">
+              <p className="max">{Math.round(list[9].main.temp)}°</p>
+              <p>&nbsp;/&nbsp;</p>
+              <p className="min">{Math.round(list[9].main.feels_like)}°</p>
             </div> 
           </div>
         </div>
