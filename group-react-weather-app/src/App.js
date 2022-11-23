@@ -309,7 +309,7 @@ function App() {
             <div class="city-box">
               <div class="city-img">
                 <img
-                  src="../../img/seoul.webp"
+                  src="img/seoul.webp"
                   alt=""
                   width="300px"
                   height="250px"
