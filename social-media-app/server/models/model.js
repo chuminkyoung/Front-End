@@ -2,44 +2,45 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username: {type: String},
-    email: {type: String},
-    bio: {type: String},
-    image: {type: String},
-    password: {type: String},
-    salt: {type: String},
+  username: {type: String},
+  email: {type: String},
+  bio: {type: String},
+  image: {type: String},
+  password: {type: String},
+  salt: {type: String},
 })
 
 const followSchema = new Schema({
-    follower: {type: String, ref: 'User'},
-    following: {type: String, ref: 'User'}
+  follower: {type: Schema.ObjectId, ref: 'User'},
+  following: {type: Schema.ObjectId, ref: 'User'}
 })
 
 const articleSchema = new Schema({
-    description: {type: String},        // 사진 설명
-    photos: [{type: String}],
-    created: {type: Date, default: Date.now},   // 작성자
-    user: {type: Schema.ObjectId, ref: 'User'}, // id
-    favoriteCout: {type: Nnumber, default: 0}   // 좋아요
+  description: {type: String},
+  photos: [{type: String}],
+  created: {type: Date, default: Date.now},
+  user: {type: Schema.ObjectId, ref: 'User'},
+  favoriteCount: {type: Number, default: 0}
 })
 
 const favoriteSchema = new Schema({
-    user: {type: Schema.ObjectId},
-    article: {type: Schema.ObjectId}
+  user: {type: Schema.ObjectId},
+  article: {type: Schema.ObjectId}
 })
 
 const commentSchema = new Schema({
-    content: {type: Strign},
-    article: {type: Schema.ObjectId},
-    user: {type: Schema.ObjectId, ref: 'User'},
-    created: {type: Date, defalt: Date.now},
-    favoriteCount: {type: Number, default: 0}
+  content: {type: String},
+  article: {type: Schema.ObjectId},
+  user: {type: Schema.ObjectId, ref: 'User'},
+  created: {type: Date, default: Date.now},
+  favoriteCount: {type: Number, default: 0}
 })
 
-const FavoriteCommentSchema = new Schema({
-    user: {type: Schema.ObjectId},
-    comment: {type: Schema.ObjectId}
+const favoriteCommentSchema = new Schema({
+  user: {type: Schema.ObjectId},
+  comment: {type: Schema.ObjectId}
 })
+
 
 exports.User = mongoose.model('User', userSchema)
 exports.Follow = mongoose.model('Follow', followSchema)
