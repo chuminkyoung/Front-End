@@ -17,17 +17,27 @@ router.get('/', (req, res) => {
 
 const auth_controller = require('../controllers/auth_controller');
 const account_controller = require('../controllers/account_controller');
+const article_controller = require('../controllers/article_controller');
 
-//# AUTH
+
+// # AUTH
 // /user 요청 했을 때 auth_controller를 실행 하기 전 auth를 인증 받기 -> 인증 받지 못하면 401 에러
 // 즉 로그인을 해야 페이지 요청 받을 수 있음
 router.get('/user', auth, auth_controller.user);
 
 
-// ACCOUNTS (계정)
+// # ACCOUNTS (계정)
 // 로그인, 회원가입, 프로필 계정 등등..
 router.post('/accounts/login', account_controller.login);
 router.post('/accounts/register', account_controller.register);
+router.post('/accounts/edit', auth, account_controller.edit);
+router.post('/accounts/edit/image', auth, account_controller.upload_image);
+router.delete('/accounts/edit/image', auth, account_controller.delete_image);
+
+
+// # ARTICLES (게시물)
+router.post('/articles', auth, article_controller.create);
+router.get('/articles', auth, article_controller.article_list);
 
 
 module.exports = router;

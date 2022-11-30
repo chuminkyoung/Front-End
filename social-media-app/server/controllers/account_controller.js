@@ -108,3 +108,87 @@ exports.register = [
         }
     },
 ]
+
+
+// 프로필 수정
+// 401 에러는 토큰에 담지 않아서 뜸
+// mongoDB -> Authorization -> type: Bearerr Token 으로 token 입력해줌
+exports.edit = async (req, res, next) => {
+    try{
+        // req.user를 login 유저변수에 담는다
+        const loginUser = req.user;
+        // req.body로부터 유저의 자기소개(bio)를 얻는다
+        const bio = req.body.bio;
+
+        // 업데이트 쿼리
+        // loginUser이라는 아이디를 찾아서user에 담는다
+        const user = await User.findById(loginUser._id);
+        // 유저의 bio를 클라이언트로 부터 전달 받음
+        user.bio = bio;
+        await user.save();
+
+        res.json(user.bio);
+    }catch(error){
+        next(error)
+    }
+}
+
+
+// 프로필 사진 등록
+exports.upload_image = async (req, res, next) => {
+    // formidable: 파일이 있는 form을 다룰때 사용되는 모듈(패키지)
+    const form = formidable({});
+
+    // form.parse 에서 파일을 다룸
+    form.parse(req, async (err, fields, files) => {
+        try{
+            if (err) {
+                return next(err);
+            }
+
+            const loginUser = req.user;
+
+            // 이미지에 랜덤 이름을 생성한 뒤 data/users 경로에 저장한다
+            const image = files.image;
+            const oldPath = image.filepath;
+            const ext = image.originalFilename.split(".")[1];
+            const newName = image.newFilename + "." + ext;
+            const newPath = `${__dirname}/../data/users/${newName}`;
+
+            // 랜덤 이름 생성
+            fs.renameSync(oldPath, newPath);
+            // 또는
+            // cross device link not permitted인 경우
+            // fs.copyFileSync(oldPath, newPath);
+
+            // 데이터베이스 이미지의 이름을 저장한다
+            const user = await User.findById(loginUser._id);
+            user.image = newName;
+            await user.save();
+
+            res.json(newName);
+
+        }catch(error){
+            next(error)
+        }
+    })
+}
+
+
+// 프로필 이미지 삭제
+exports.delete_image = async (req, res, next) => {
+    try{
+        const loginUser = req.user;
+
+        // 유저이미지 null로 업데이트
+        const user = await User.findById(loginUser._id);
+        user.image = null;
+        await user.save();
+
+        // 섭가 응답을 종료한다
+        res.end();
+
+    }catch(error){
+        next(error)
+    }
+}
