@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 const auth_controller = require('../controllers/auth_controller');
 const account_controller = require('../controllers/account_controller');
 const article_controller = require('../controllers/article_controller');
+const comment_controller = require('../controllers/comment_controller');
 
 
 // # AUTH
@@ -36,8 +37,17 @@ router.delete('/accounts/edit/image', auth, account_controller.delete_image);
 
 
 // # ARTICLES (게시물)
-router.post('/articles', auth, article_controller.create);
-router.get('/articles', auth, article_controller.article_list);
+router.post('/articles', auth, article_controller.create);                      // 게시물 등록
+router.get('/articles', auth, article_controller.article_list);                 // 전체 게시물 가져오기
+router.get('/articles/:id', auth, article_controller.article);                  // 게시물 하나 등록
+router.delete('/articles/:id', auth, article_controller.delete);                // 게시물 삭제
+router.post('/articles/:id/favorite', auth, article_controller.favorite);       // 좋아요
+router.delete('/articles/:id/favorite', auth, article_controller.unfavorite);   // 좋아요 취소
+router.get('/feed', auth, article_controller.feed);                             // 피드
+
+
+// # COMMENTS (댓글)
+router.post('/articles/:id/comments', auth, comment_controller.create);         // 댓글 작성
 
 
 module.exports = router;
