@@ -68,3 +68,102 @@ exports.timeline = async (req, res, next) => {
         next(error)
     }
 }
+
+
+// 팔로우
+exports.follow = async (req, res, next) => {
+    try{
+        const loginUser = req.user;
+        const username = req.params.username;
+
+        // 쿼리
+        const user = await User.findOne({ username })
+        const follow = await Follow
+            .findOne({ follower: loginUser._id, following: user._id })
+
+        // 로그인유저가 팔로우 요청을 한 유저를 이미 팔로잉 하고 있을 때
+        if(follow) {
+            const err = new Error("Already follow");
+            err.status = 400;
+            return next(err)
+        }
+
+        // 새로운 팔로우 데이터를 생성한다다
+        const newFollow = new Follow({
+            follower: loginUser._id,
+            following: user._id
+        })
+        await newFollow.save();
+
+        res.end();
+
+    }catch(error){
+        next(error)
+    }
+}
+
+
+// 언팔
+exports.unfollow = async (req, res, next) => {
+    try{
+        const loginUser = req.user;
+        const username = req.params.username;
+
+        // 쿼리
+        const user = await User.findOne({ username });
+        const follow = await Follow
+            .findOne({ follower: loginUser._id, following: user._id });
+
+        // 팔로잉 중인 유저가 아닐 때
+        if(!follow) {
+            const err = new Error("Follow not found");
+            err.status = 400;
+            return next(err);
+        }
+
+        // 팔로우데이터 삭제
+        await follow.delete();
+
+        res.end();
+
+    }catch(error){
+        next(error)
+    }
+}
+
+
+// 팔로워 리스트
+exports.follower_list = async (req, res, next) => {
+    try{
+        const username = req.params.username;
+        const user = await User.findOne({ username });
+
+        const follows = await Follow
+            .find({ following: user._id }, "follower")
+            .populate("follower")
+
+            res.json(follows)
+
+    }catch(error){
+        next(error)
+    }
+}
+
+
+// 팔로잉 리스트
+exports.following_list = async (req, res, next) => {
+    try{
+        const username = req.params.username;
+        const user = await User.findOne({ username });
+
+        // 팔로우 데이터 활용 해서
+        const follows = await Follow
+            .find({ follower: user._id }, "following")
+            .populate("following")
+
+            res.json(follows)
+
+    }catch(error){
+        next(error)
+    }
+}

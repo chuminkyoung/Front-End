@@ -33,8 +33,8 @@ router.get('/user', auth, auth_controller.user);
 
 // # ACCOUNTS (계정)
 // 로그인, 회원가입, 프로필 계정 등등..
-router.post('/accounts/login', account_controller.login);
-router.post('/accounts/register', account_controller.register);
+router.post('/accounts/login', account_controller.login);           // 로그인 후 토큰 발급
+router.post('/accounts/register', account_controller.register);     // 회원가입 // username, email, password
 router.post('/accounts/edit', auth, account_controller.edit);
 router.post('/accounts/edit/image', auth, account_controller.upload_image);
 router.delete('/accounts/edit/image', auth, account_controller.delete_image);
@@ -73,7 +73,12 @@ router.get('/search', auth, search_controller.username);        // 유저 이름
 
 // # PROFILE (프로필)
 // localhost:3000/profiles/user01
-router.get('/profiles/:username', auth, profile_controller.profile);       // 프로필
-router.get('/profiles/:username/articles', auth, profile_controller.timeline);     // 프로필 유저의 게시물
+router.get('/profiles/:username', auth, profile_controller.profile);                    // 프로필
+router.get('/profiles/:username/articles', auth, profile_controller.timeline);          // 프로필 유저의 게시물
+router.post('/profiles/:username/follow', auth, profile_controller.follow);             // 팔로우
+router.delete('/profiles/:username/follow', auth, profile_controller.unfollow);         // 언팔
+router.get('/profiles/:username/followers', auth, profile_controller.follower_list);    // 팔로워 리스트
+router.get('/profiles/:username/following', auth, profile_controller.following_list);   // 팔로잉 리스트
+
 
 module.exports = router;
