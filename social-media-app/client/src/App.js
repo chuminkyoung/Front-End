@@ -4,11 +4,11 @@ import AuthRequired from "./components/AuthRequired";
 import Layout from "./components/Layout";
 import Feed from "./components/Feed";
 import ArticleList from "./components/ArticleList";
-import AritcleCreate from "./components/ArticleCreate";
+import ArticleCreate from "./components/ArticleCreate";
 import ArticleView from "./components/ArticleView";
 import Comments from "./components/Comments";
 import Search from "./components/Search";
-import Login from "./components/Search";
+import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import Accounts from "./components/Accounts";
@@ -26,12 +26,12 @@ function App() {
             <AuthRequired>
               {/* Layout - 헤더, 푸터 - 바뀌지 않는 부분 */}
               <Layout />
-            </AuthRequired>
+            </AuthRequired> 
           }>
             <Route index element={<Feed />} />
             <Route path="articles" element={<ArticleList />} />
             <Route path="search" element={<Search />} />
-            <Route path="create" element={<AritcleCreate />} />
+            <Route path="create" element={<ArticleCreate />} />
             <Route path="article/:articleId">
               <Route index element={<ArticleView />} />
               <Route path="comments" element={<Comments />} />
@@ -47,7 +47,7 @@ function App() {
         </Routes>
       </AuthProvider>
     </Router>
-  );
+  )
 }
 
 export default App;
