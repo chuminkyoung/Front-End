@@ -7,7 +7,32 @@ export default function ArticleCreate() {
   const [files, setFiles] = useState({});
   const [text, setText] = useState("");
 
-  function handleSubmit(e) {}
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    fetch(`${process.env.REACT_APP_SERVER}/articles`, {
+      method: "POST",
+      headers: { 
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      },
+      body: formData
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw res;
+      }
+      return res.json()
+    })
+    .then(data => {
+      // 피드페이지로 이동한다
+      navigate("/", { replace: true });
+    })
+    .catch(error => {
+      alert("Something's broken");
+    })
+  }
 
   console.log(files);
 
@@ -23,8 +48,8 @@ export default function ArticleCreate() {
           type="file" 
           name="images"
           onChange={(e) => setFiles(e.target.files)} 
-          multiple={true}   // 여러개의 파일을 담을 수 있음
-          accept="image/*"  // /* 이미지 파일로 된 모든 파일을 담을 수 있음
+          multiple={true}
+          accept="image/*" 
         />
         <ul className="bg-gray-100">
           {fileList}
