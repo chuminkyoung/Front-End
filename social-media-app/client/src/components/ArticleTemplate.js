@@ -12,9 +12,12 @@ export default function ArticleTemplate({article, favorite, unfavorite, deleteAr
   const created = new Date(article.created).toLocaleDateString();
 
   function toggleFavorite() {
-    if (article.isFavorite) {
+
+    if (article.isFavorite) { // 이미 좋아요를 누른 게시물
+      // 좋아요 취소
       unfavorite(article._id)
     } else {
+      // 좋아요
       favorite(article._id)
     }
   }
@@ -29,7 +32,12 @@ export default function ArticleTemplate({article, favorite, unfavorite, deleteAr
         {isMaster && (
           <Modal>
             <li className="border-b">
-              <button className="w-full p-1" onClick={() => deleteArticle(article._id)}>Delete</button>
+              <button 
+                className="w-full p-1" 
+                onClick={() => deleteArticle(article._id)}
+                >
+                  Delete
+                </button>
             </li>
           </Modal>
         )}
@@ -41,6 +49,8 @@ export default function ArticleTemplate({article, favorite, unfavorite, deleteAr
       </div>
 
       <div className="px-2">
+
+        {/* 좋아요 */}
         <div className="flex">
           <button
             type="button"

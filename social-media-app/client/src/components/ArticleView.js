@@ -8,7 +8,7 @@ export default function ArticleView() {
   const [error, setError] = useState(null)
   const [article, setArticle] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // 게시물 가져오기 요청
   useEffect(() => {
@@ -22,6 +22,7 @@ export default function ArticleView() {
     .finally(() => setIsLoaded(true))
   }, [])
 
+  // 좋아요
   function favorite(articleId) {
     fetch(`${process.env.REACT_APP_SERVER}/articles/${articleId}/favorite`, {
       method: 'POST',
@@ -31,7 +32,9 @@ export default function ArticleView() {
       if (!res.ok) {
         throw res;
       }
+
       const editedArticle = {...article, isFavorite: true, favoriteCount: article.favoriteCount + 1 };
+      // article state를 업데이트한다
       setArticle(editedArticle);
     })
     .catch(error => {
@@ -39,6 +42,7 @@ export default function ArticleView() {
     })
   }
 
+  // 좋아요 취소
   function unfavorite(articleId) {
     fetch(`${process.env.REACT_APP_SERVER}/articles/${articleId}/favorite`, {
       method: 'DELETE',
@@ -49,6 +53,7 @@ export default function ArticleView() {
         throw res;
       }
       const editedArticle = {...article, isFavorite: false, favoriteCount: article.favoriteCount - 1 };
+      // article 업데이트
       setArticle(editedArticle);
     })
     .catch(error => {
@@ -56,6 +61,7 @@ export default function ArticleView() {
     })
   }
 
+  // 게시물 삭제
   function deleteArticle(articleId) { 
     fetch(`${process.env.REACT_APP_SERVER}/articles/${articleId}`, {
       method: 'DELETE',
@@ -65,6 +71,7 @@ export default function ArticleView() {
       if (!res.ok) {
         throw res;
       }
+      // 게시물 삭제후, 피드로 이동
       navigate("/", { replace: true })
     })
     .catch(error => {
