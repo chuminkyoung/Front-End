@@ -10,6 +10,8 @@ export default function Feed() {
   const [articles, setArticles] = useState([]);
   const [skip, setSkip] = useState(0);
 
+  console.log(articles);
+
   useEffect(() => {
     setIsLoaded(false);
     setError(null);
@@ -37,6 +39,7 @@ export default function Feed() {
         throw res;
       }
 
+      // articles 업데이트
       const editedArticles = articles.map(article => {
         if (articleId === article._id) {
           return { ...article, isFavorite: false, favoriteCount: article.favoriteCount - 1 };
@@ -60,6 +63,7 @@ export default function Feed() {
         throw res;
       }
 			
+      // articles 업데이트
       const editedArticles = articles.map(article => {
         if (articleId === article._id) {
           return { ...article, isFavorite: true, favoriteCount: article.favoriteCount + 1 };
@@ -81,6 +85,8 @@ export default function Feed() {
       if (!res.ok) {
         throw res;
       }
+
+      // articles 업데이트
       const updatedArticles = articles.filter(article => articleId !== article._id);
       setArticles(updatedArticles);
     })
@@ -88,8 +94,6 @@ export default function Feed() {
       alert("Something's broken")
     })
   }
-
-  console.log(articles)
 
   const articleList = articles.map(article => (
     <li key={article._id} className="mb-4">
